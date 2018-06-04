@@ -1,0 +1,18 @@
+default: &default
+  encoding: utf8
+  adapter: mysql2
+  host: localhost
+  username: root
+  password: root
+
+development:
+  <<: *default
+  database: flovis
+
+test:
+  <<: *default
+  database: flovis_test
+
+production:
+  <<: *default
+  database: flovis
