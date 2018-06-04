@@ -1,15 +1,71 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Farmhouse</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>
+    <%= if content_for?(:title) then yield(:title) + ' - ' end %>
+    Farmhouse
+  </title>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <body>
-    <%= yield %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+
+  <%= stylesheet_link_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" %>
+  <%= stylesheet_link_tag "https://charcoal-se.org/assets/css/branding.css" %>
+
+  <%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" %>
+  <%= javascript_include_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" %>
+  <%= javascript_pack_tag 'vendor', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= action_cable_meta_tag %>
+</head>
+  <body class="<%= controller.class.name.sub(/Controller$/, '').underscore.dasherize %>">
+
+    <nav class="navbar navbar-default navbar-static-top <%= "navbar-inverse" unless Rails.env.production? %>">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="inline home" href="//charcoal-se.org/"><img src="//charcoal-se.org/assets/images/charcoal.png" height="32"><span>by Charcoal</span></a>
+          <a class="navbar-brand" href="/">metasmoke</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+    <div class="col-md-offset-1 col-md-10">
+      <% flash.each do |key, value| %>
+        <% if %w[primary secondary success danger warning info light dark message alert muted].include? key.to_s %>
+          <div class="alert alert-<%= key %>"><%= value %></div>
+        <% end %>
+      <% end %>
+
+      <%= yield %>
+
+      <div class="footer">
+        <p class="text-muted">
+          We are <a href="//charcoal-se.org/">Charcoal</a> (not <a href="//stackexchange.com/">Stack Exchange</a>). We make <a href="//github.com/Charcoal-SE">nice things</a>.<br/>
+          <a href="//chat.stackexchange.com/rooms/11540/charcoal-hq">chat</a> • <a href="//charcoal-se.org/security">security</a> • <a href="mailto:smokey@charcoal-se.org">contact</a><br/>
+          <span class="small">Post content sourced from the <a href="http://stackexchange.com">Stack Exchange Network</a>.</span>
+        </p>
+      </div>
+    </div>
   </body>
 </html>
