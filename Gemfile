@@ -19,7 +19,8 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'bootsnap', '>= 1.1.0', require: false
 
-gem 'will_paginate', '~> 3.0.3'
+gem 'htmlentities', '~> 4.3.4'
+gem 'will_paginate', '~> 3.1.5', github: 'Undo1/will_paginate'
 gem 'will_paginate-bootstrap', '~> 1.0.1'
 
 group :development, :test do
