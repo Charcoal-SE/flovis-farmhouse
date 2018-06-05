@@ -1,6 +1,6 @@
 <div class="post">
   <%= link_to "##{post.id}", post_path(post) %>
-  <span class="text-muted">(<%= post.site.name %> #<%= post.native_id %>)</span>
+  <span class="text-muted">(<%= @he.decode post.site.name %> #<%= post.native_id %>)</span>
 
   <div class="pull-right text-muted">
     <code title="Last recorded stage"><%= post.stages.last.name %></code>
