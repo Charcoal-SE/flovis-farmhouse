@@ -7,6 +7,6 @@
     &middot;
     <span class="glyphicon glyphicon-paperclip" title="Stages recorded"></span> <%= post.stages.count %>
     &middot;
-    <span class="glyphicon glyphicon-stats" title="Data length"></span> <%= (post.stages.map { |s| s.data.length }.sum.to_f / 1000).round(3) %> kB
+    <span class="glyphicon glyphicon-stats" title="Data length"></span> <%= (post.stages.map { |s| s.data.to_s.length }.sum.to_f / 1000).round(3) %> kB
   </div>
 </div>
