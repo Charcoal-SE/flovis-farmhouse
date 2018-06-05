@@ -14,3 +14,9 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+
+$(document).ready(function() {
+  $('.stage-data').each(function (i, e) {
+    $(e).text(JSON.stringify(JSON.parse($(e).text()), null, 4));
+  });
+});

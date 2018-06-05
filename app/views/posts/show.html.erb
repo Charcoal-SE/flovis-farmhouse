@@ -1,0 +1,14 @@
+<h1>#<%= @post.id %> <small>(<%= @post.site.name %> #<%= @post.native_id %>)</small></h1>
+<p><%= link_to "#{@post.site.url}/q/#{@post.native_id}", style: "color: #{@post.site.link_color}" do %>
+  <%= image_tag @post.site.icon_url, height: 32, width: 32 %> Visit post
+<% end %></p>
+
+<p>
+  Initially received <span title="<%= @post.created_at %>"><%= time_ago_in_words @post.created_at %> ago</span>.
+</p>
+
+<div class="panel-group" id="stages" role="tablist">
+  <% @post.stages.each do |s| %>
+    <%= render 'stages/stage', stage: s %>
+  <% end %>
+</div>

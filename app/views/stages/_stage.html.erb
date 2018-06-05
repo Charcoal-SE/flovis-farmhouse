@@ -1,0 +1,17 @@
+<div class="panel panel-default">
+  <div class="panel-heading" role="tab">
+    <h4 class="panel-title">
+      <a role="button" data-toggle="collapse" data-parent="#stages" href="#stage-<%= stage.id %>">
+        <code><%= stage.name %></code>
+      </a>
+      <span class="pull-right text-muted" title="<%= stage.created_at %>">
+        <%= time_ago_in_words stage.created_at %> ago
+      </span>
+    </h4>
+  </div>
+  <div id="stage-<%= stage.id %>" class="panel-collapse collapse" role="tabpanel">
+    <div class="panel-body">
+      <pre class="stage-data prettyprint"><%= JSON.dump(stage.data) %></pre>
+    </div>
+  </div>
+</div>
