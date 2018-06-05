@@ -15,7 +15,7 @@
 //= require turbolinks
 //= require_tree .
 
-$(document).ready(function() {
+$(document).on('turbolinks:load', function() {
   $('.stage-data').each(function (i, e) {
     $(e).text(JSON.stringify(JSON.parse($(e).text()), null, 4));
   });
