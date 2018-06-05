@@ -1,0 +1,10 @@
+<h1>Scanned Posts</h1>
+<p>All recently scanned posts, in reverse (most recently scanned first) order.</p>
+
+<% @posts.each do |p| %>
+  <%= render 'post', post: p %>
+<% end %>
+
+<div class="text-center">
+  <%= will_paginate @posts, renderer: BootstrapPagination::Rails %>
+</div>

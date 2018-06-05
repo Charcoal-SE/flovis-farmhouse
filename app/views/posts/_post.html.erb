@@ -1,0 +1,12 @@
+<div class="post">
+  <%= link_to "##{post.id}", post_path(post) %>
+  <span class="text-muted">(<%= post.site.name %> #<%= post.native_id %>)</span>
+
+  <div class="pull-right text-muted">
+    <code title="Last recorded stage"><%= post.stages.last.name %></code>
+    &middot;
+    <span class="glyphicon glyphicon-paperclip" title="Stages recorded"></span> <%= post.stages.count %>
+    &middot;
+    <span class="glyphicon glyphicon-stats" title="Data length"></span> <%= (post.stages.map { |s| s.data.length }.sum.to_f / 1000).round(3) %> kB
+  </div>
+</div>
