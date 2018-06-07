@@ -6,6 +6,10 @@
       </a>
       <span class="pull-right text-muted" title="<%= stage.created_at %>">
         <%= time_ago_in_words stage.created_at %> ago
+        <small>
+          (<%= pretty_time_span first.created_at, stage.created_at %> from first,
+           <%= pretty_time_span previous.created_at, stage.created_at %> from previous)
+        </small>
       </span>
     </h4>
   </div>

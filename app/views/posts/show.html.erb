@@ -8,7 +8,8 @@
 </p>
 
 <div class="panel-group" id="stages" role="tablist">
-  <% @post.stages.each do |s| %>
-    <%= render 'stages/stage', stage: s %>
+  <% @post.stages.each.with_index do |s, i| %>
+    <% previous = @post.stages[[i - 1, 0].max] %>
+    <%= render 'stages/stage', stage: s, previous: previous, first: @post.stages.first %>
   <% end %>
 </div>
