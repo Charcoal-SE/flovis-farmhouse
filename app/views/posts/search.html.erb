@@ -1,0 +1,15 @@
+<h1>Post Search</h1>
+<p>Paste a Stack Exchange URL in the search box to find the related record in Farmhouse.</p>
+
+<%= form_tag posts_search_path, method: :get, class: 'form-inline' do %>
+  <%= text_field_tag :q, params[:q], class: 'form-control input-md', placeholder: 'Stack Exchange URL' %>
+  <%= submit_tag 'Search', class: 'btn btn-primary btn-md' %>
+<% end %><br/>
+
+<% if params[:q].present? && @posts.present? %>
+  <% @posts.each do |p| %>
+    <%= render 'post', post: p %>
+  <% end %>
+<% else %>
+  <p class="text-muted"><span class="glyphicon glyphicon-remove-circle"></span> No results :(</p>
+<% end %><br/>
