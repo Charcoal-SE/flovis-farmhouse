@@ -2,7 +2,20 @@
 
 class PostsController < ApplicationController
   def index
-    @posts = Post.includes(:site, :stages).order(created_at: :desc).paginate(page: params[:page], per_page: 100)
+    @posts = Post.all
+    @distinct_stages = Stage.select(Arel.sql('DISTINCT name')).map { |s| [s.name, s.name] }
+
+    @posts = @posts.where(site_id: params[:sites]) if params[:sites].present?
+
+    if params[:stage].present?
+      @posts = @posts.where(id: Post.joins(:stages).where(stages: { name: params[:stage] }))
+    elsif params[:ls].present?
+      @posts = @posts.where(id: Post.joins('INNER JOIN stages AS s1 ON s1.post_id = posts.id')
+                                    .joins('LEFT JOIN stages AS s2 ON s2.post_id = posts.id AND s1.id < s2.id')
+                                    .where(s2: { id: nil }, s1: { name: params[:ls] }))
+    end
+
+    @posts = @posts.includes(:site, :stages).order(created_at: :desc).paginate(page: params[:page], per_page: 100)
   end
 
   def search

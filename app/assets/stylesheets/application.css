@@ -13,3 +13,8 @@
  *= require_tree .
  *= require_self
  */
+
+.form-horizontal .form-group {
+    display: flex;
+    align-items: center;
+}

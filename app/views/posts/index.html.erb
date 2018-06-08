@@ -2,9 +2,52 @@
 <p>All recently scanned posts, in reverse (most recently scanned first) order.</p>
 
 <% @he = HTMLEntities.new %>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <%= form_tag posts_path, method: :get, class: 'form-horizontal' do %>
+      <div class="form-group field">
+        <div class="col-md-1 text-right">
+          <%= label_tag :sites %>
+        </div>
+        <div class="col-md-5">
+          <%= select_tag :sites, options_for_select(Site.all.order(name: :asc).map { |s| [@he.decode(s.name), s.id] }, selected: params[:sites]),
+                         multiple: true, class: 'selectpicker form-control input-md', placeholder: '*' %>
+        </div>
+      </div>
+
+      <div class="form-group field">
+        <div class="col-md-1 text-right">
+          <%= label_tag :stage, 'Has Stage' %>
+        </div>
+        <div class="col-md-5">
+          <%= select_tag :stage, options_for_select(@distinct_stages, selected: params[:stage]),
+                         class: 'selectpicker form-control input-md', placeholder: '*', include_blank: true, disabled: params[:ls].present? %>
+        </div>
+      </div>
+
+      <div class="form-group field">
+        <div class="col-md-1 text-right">
+          <%= label_tag :ls, 'Last Stage' %>
+        </div>
+        <div class="col-md-5">
+          <%= select_tag :ls, options_for_select(@distinct_stages, selected: params[:ls]),
+                         class: 'selectpicker form-control input-md', placeholder: '*', include_blank: true, disabled: params[:stage].present? %>
+        </div>
+      </div>
+
+      <div class="actions">
+        <div class="col-md-1 text-right">
+          <%= submit_tag 'Filter', class: 'btn btn-md btn-primary', name: nil %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
 <% @posts.each do |p| %>
   <%= render 'post', post: p %>
-<% end %>
+<% end %><br/>
 
 <div class="text-center">
   <%= will_paginate @posts, renderer: BootstrapPagination::Rails %>

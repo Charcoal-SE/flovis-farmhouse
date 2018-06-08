@@ -16,7 +16,29 @@
 //= require_tree .
 
 $(document).on('turbolinks:load', function() {
+  $('.selectpicker').selectpicker({
+    actionsBox: true
+  });
+
   $('.stage-data').each(function (i, e) {
     $(e).text(JSON.stringify(JSON.parse($(e).text()), null, 4));
+  });
+
+  $('[name=stage]').on('change', function () {
+    if ($(this).val()) {
+      $('[name=ls]').attr('disabled', true).selectpicker('refresh');
+    }
+    else {
+      $('[name=ls]').attr('disabled', false).selectpicker('refresh');
+    }
+  });
+
+  $('[name=ls]').on('change', function () {
+    if ($(this).val()) {
+      $('[name=stage]').attr('disabled', true).selectpicker('refresh');
+    }
+    else {
+      $('[name=stage]').attr('disabled', false).selectpicker('refresh');
+    }
   });
 });
