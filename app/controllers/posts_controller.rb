@@ -3,7 +3,9 @@
 class PostsController < ApplicationController
   def index
     @posts = Post.all
-    @distinct_stages = Stage.select(Arel.sql('DISTINCT name')).map { |s| [s.name, s.name] }
+    @distinct_stages = Rails.cache.fetch :distinct_stages, expires_in: 1.day do
+      Stage.select(Arel.sql('DISTINCT name')).map { |s| [s.name, s.name] }
+    end
 
     @posts = @posts.where(site_id: params[:sites]) if params[:sites].present?
 
