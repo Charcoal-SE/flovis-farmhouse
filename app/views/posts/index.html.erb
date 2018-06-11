@@ -36,6 +36,24 @@
         </div>
       </div>
 
+      <div class="form-group field">
+        <div class="col-md-1 text-right">
+          <%= label_tag :from, 'From Date' %>
+        </div>
+        <div class="col-md-5">
+          <%= date_field_tag :from, params[:from], class: 'form-control input-md' %>
+        </div>
+      </div>
+
+      <div class="form-group field">
+        <div class="col-md-1 text-right">
+          <%= label_tag :to, 'To Date' %>
+        </div>
+        <div class="col-md-5">
+          <%= date_field_tag :to, params[:to], class: 'form-control input-md' %>
+        </div>
+      </div>
+
       <div class="actions">
         <div class="col-md-1 text-right">
           <%= submit_tag 'Filter', class: 'btn btn-md btn-primary', name: nil %>

@@ -1,4 +1,4 @@
-<h1>#<%= @post.id %> <small>(<%= @post.site.name %> #<%= @post.native_id %>)</small></h1>
+<h1>#<%= @post.id %> <small>(<%= HTMLEntities.new.decode @post.site.name %> #<%= @post.native_id %>)</small></h1>
 <p><%= link_to "#{@post.site.url}/q/#{@post.native_id}", style: "color: #{@post.site.link_color}" do %>
   <%= image_tag @post.site.icon_url, height: 32, width: 32 %> Visit post
 <% end %></p>

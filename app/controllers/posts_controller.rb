@@ -17,6 +17,9 @@ class PostsController < ApplicationController
                                     .where(s2: { id: nil }, s1: { name: params[:ls] }))
     end
 
+    @posts = @posts.where('posts.created_at >= ?', params[:from]) if params[:from].present?
+    @posts = @posts.where('posts.created_at <= ?', params[:to]) if params[:to].present?
+
     @posts = @posts.includes(:site, :stages).order(created_at: :desc).paginate(page: params[:page], per_page: 100)
   end
 
